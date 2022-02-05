@@ -1,3 +1,14 @@
 {
-"Update": "This is only a test"
+    "RecentUpdate": "0.0.2",
+    "Versions":
+    [
+        {
+            "Version":"0.0.2",
+            "PatchNote": "자동 업데이트를 지원"
+        },
+        {
+            "Version":"0.0.1",
+            "PatchNote": "지명 번역이 실패하였을 때 일본어로라도 표시될 수 있도록 수정\n일본 긴급지진속보(경보) 5 강의 그림이 나타나지 못한 점 수정"
+        }
+    ]
 }
