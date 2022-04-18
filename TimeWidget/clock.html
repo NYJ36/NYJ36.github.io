@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ClockWidget</title>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+            html {
+            background: transparent;
+            }
+            .timetext{
+                font-family: 'Jua', sans-serif;
+                font-size:110pt;
+                text-align: right;
+                margin: 1;
+                opacity: 0.8;
+                -webkit-text-stroke-width: 0.03em;
+                -webkit-text-stroke-color: black;
+                color: white;
+            }
+        </style>
+    </head>
+
+    <body>
+        <p class="timetext" id="timetext">00(금)<br>00:00</p>
+    </body>
+    <script src="http://code.jquery.com/jquery-latest.js"></script> 
+    <script>
+        var asdf = new Date();
+        var day = ["일", "월", "화", "수", "목", "금", "토"]
+        clock_sync();
+        clock_tick();
+        setInterval(clock_tick, 1000);
+        setInterval(clock_sync, 300000);
+        function clock_tick(){
+        asdf.setSeconds(asdf.getSeconds() + 1);
+        document.getElementById('timetext').textContent = `${asdf.getDate()}(${day[asdf.getDay()]})
+        ${asdf.getHours()}:${asdf.getMinutes()}`;
+        if (asdf.getHours() == 59 && asdf.getSeconds() == 57)
+        {
+            var audio = new Audio('TimeReport.mp3');
+            audio.volume = 0.3;
+            audio.play();
+        }
+        }
+        function clock_sync(){
+            $.getJSON('http://worldtimeapi.org/api/timezone/Asia/Seoul', function(data) {
+                asdf = new Date(data['datetime']);
+            })
+        }
+    </script>
+</html>
